@@ -1,0 +1,20 @@
+= Scala in android
+
+Mariusz Saramak <mariusz@saramak.pl>
+v1.0, 2016-05-03
+
+:linkcss:
+:copycss:
+:icons: font
+
+This is the optional preamble (an untitled section body). Useful for
+writing simple sectionless documents consisting only of a preamble.
+
+NOTE: The abstract, preface, appendix, bibliography, glossary and
+index section titles are significant ('specialsections').
+
+
+:numbered!:
+[abstract]
+Example Abstract
+----------------
