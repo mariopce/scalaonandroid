@@ -1,17 +1,33 @@
 = Scala in android
-
 Mariusz Saramak <mariusz@saramak.pl>
 v1.0, 2016-05-03
-
+:toc: left
 :linkcss:
 :copycss:
 :icons: font
 
-This is the optional preamble (an untitled section body). Useful for
-writing simple sectionless documents consisting only of a preamble.
+== Env setup.
 
-NOTE: The abstract, preface, appendix, bibliography, glossary and
-index section titles are significant ('specialsections').
+=== Linux
+
+[NOTE]
+====
+Since android sdk, IDE and scala are huge We need install all tools before workshop. All this
+tool is around few GB of data and downloading and installation whole env can take more then 4h.
+====
+
+1. Java sdk ver 7.0.
+
+include::java-ubuntu-instalation.adoc[]
+
+2. Android Studio and Android SDK
+
+
+
+3. Scala
+
+4. Other tools
+
 
 
 :numbered!:
