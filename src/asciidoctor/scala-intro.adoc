@@ -47,6 +47,7 @@ File -> New project -> SBT
 
 Create ScalaTutorial class
 
+while
 [source]
 object ScalaTutorial {
   def main(args: Array[String]) {
@@ -58,18 +59,115 @@ object ScalaTutorial {
   }
 }
 
-==== First real program in Scala
+Do while
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]) {
+    var i = 0
+    do {
+      println("i " + i);
+      i+=1
+    } while  (i<10)
+  }
+}
 
-add dependencies to sbt
+loop through the lethers
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]) {
+    val lethers = "ahfweuihfuiweh";
+    var i = 0;
+    for (i <- 0 until lethers.length){
+      println(lethers(i))
+    }
+  }
+}
+
+loop through the lethers
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    var aList = List("a", "b", "c", "d")
+    for(item<-aList){
+      println(item)
+    }
+  }
+}
+
+even list
 
 [source]
-// http://mvnrepository.com/artifact/net.rcarz/jira-client
-libraryDependencies += "net.rcarz" % "jira-client" % "0.5"
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    var i = 0;
+    var evenList = for {i <- 1 to 20
+                        if (i % 2) == 0
+    } yield i + " zl"
+    println(evenList)
+  }
+}
 
-// http://mvnrepository.com/artifact/com.martiansoftware/jsap
-libraryDependencies += "com.martiansoftware" % "jsap" % "2.1"
+multiple iteration loop
 
+[source]
+for (i<-0 to 8; j<-'a' to 'h'){
+      println(String.valueOf(j) + i)
+    }
 
+define functions
+
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    newFunction()
+  }
+  def newFunction(): Unit ={
+    println("hallo world!!")
+  }
+}
+
+string displaying
+
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    val name = "Mario"
+    val age = 31
+    val weight = 80.5;
+    println(s"My name is $name")
+    println(f"My age is ${age +1} and my weight is $weight.2f")
+  }
+}
+
+String playing
+
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    val exString = "Mariusz Saramak"
+    println("My 3rd lather is " + exString(3))
+    println("My name length " + exString.length)
+    println("My name is Mario ?  " + exString.equals("Mario"))
+    println("My title is " + "Mgr inż ".concat(exString))
+  }
+}
+
+Functions
+
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    def getSum(n1:Int=0, n2:Int=0) : Int = { //default value, return type
+     return n1+n2 // retrurn or not return
+    }
+    val sum = getSum(1, 5);
+    println(sum);
+    val sum2 = getSum(n2=1, n1=2);
+    println(sum2);
+    val sum3 = getSum(2);
+    println(sum3);
+  }
+}
 
 
 
