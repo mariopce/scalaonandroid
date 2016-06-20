@@ -1,0 +1,75 @@
+==== Scala command line
+
+[source]
+scala> 2+3
+res0: Int = 5
+scala> "Your answer " + res0
+res1: String = Your answer 5
+scala> var myAge=31 // can be changed
+myAge: Int = 31
+scala> val myName="Mariusz" // not to change
+myName: String = Mariusz
+scala> myName = "Kuba"
+<console>:12: error: reassignment to val
+       myName = "Kuba
+scala> val bigMoney = BigInt("2213123123123")
+bigMoney: scala.math.BigInt = 2213123123123
+scala> val bigPI = BigDecimal("3.1432131315424134123412432143214312412")
+bigPI: scala.math.BigDecimal = 3.1432131315424134123412432143214312412
+//Import scala library
+scala> import scala.math._
+import scala.math._
+scala> abs(-7)
+res0: Int = 7
+scala> ceil(3.45)
+res1: Double = 4.0
+scala> round(3.45)
+res2: Long = 3
+scala> floor(3.45)
+res3: Double = 3.0
+scala> max(1, 5)
+res0: Int = 5
+scala> min(1, 5)
+res1: Int = 1
+// http://www.scala-lang.org/api/rc2/scala/math/package.html
+scala> var age2 = 23
+age2: Int = 23
+scala> age2 = "fsfs"
+<console>:15: error: type mismatch;
+ found   : String("fsfs")
+ required: Int
+       age2 = "fsfs"
+:q
+
+==== Scala in InteliJ.
+
+File -> New project -> SBT
+
+Create ScalaTutorial class
+
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]) {
+    var i = 0
+    while (i<10){
+      i+=1
+      println("i " + i);
+    }
+  }
+}
+
+==== First real program in Scala
+
+add dependencies to sbt
+
+[source]
+// http://mvnrepository.com/artifact/net.rcarz/jira-client
+libraryDependencies += "net.rcarz" % "jira-client" % "0.5"
+
+// http://mvnrepository.com/artifact/com.martiansoftware/jsap
+libraryDependencies += "com.martiansoftware" % "jsap" % "2.1"
+
+
+
+
+

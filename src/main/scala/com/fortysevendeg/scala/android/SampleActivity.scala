@@ -17,16 +17,40 @@
 package com.fortysevendeg.scala.android
 
 import android.app.Activity
+import android.content.Context
+import android.location.LocationManager
 import android.os.Bundle
 
-class SampleActivity extends Activity with TypedFindView {
+class SampleActivity extends Activity with TypedFindView with ImplicitContext with ScalaToasts {
 
+  lazy val textHello = findView(TR.textview);
+
+
+  //lazy val locationManager; //= LocationManager
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(R.layout.main)
-    findView(TR.textview).setText(R.string.hello_world)
+    textHello.setText(R.string.hello_world)
+    //TR - Typed Resource better R
+
+
+    //Implisit convertion
+    def toastConference() = "fsfs".toast
+
+    new Toastable("mes").toast
+
+    toastMyName("fdsfds")
+
 
   }
+
+
+  //Implisit params
+  def toastMyName(name: String)(implicit ctx: Context) = {
+    import android.widget.Toast._
+    makeText(ctx, name, LENGTH_SHORT).show();
+  }
+
 
 
 }

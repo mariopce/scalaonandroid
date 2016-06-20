@@ -39,4 +39,6 @@ scalacOptions += "-target:jvm-1.7"
 
 enablePlugins(AsciidoctorPlugin)
 
+libraryDependencies += android.Dependencies.aar("eu.inmite.android.lib" % "android-validation-komensky" % "0.9.4")
+
 fork in run := true

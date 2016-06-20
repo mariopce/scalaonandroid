@@ -16,21 +16,84 @@ Since android sdk, IDE and scala are huge We need install all tools before works
 tool is around few GB of data and downloading and installation whole env can take more then 4h.
 ====
 
-1. Java sdk ver 7.0.
-
-include::java-ubuntu-instalation.adoc[]
-
+1. Java sdk ver 7.0 or 8.0
++
+--
+include::java-ubuntu-installation.adoc[]
+--
 2. Android Studio and Android SDK
++
+--
+all information how to install and run android studio: http://developer.android.com/sdk/index.html
+
+Additionally you should setup ANDROID_HOME env.
+
+`echo $ANDROID_HOME` should show path to your android sdk home dir.
+
+and add `$ANDROID_HOME/tools/` and `$ANDROID_HOME/platform_tools/` to your $PATH.
+
+Example by add line in $HOME/.bashrc file.
+
+[source,bash]
+export ANDROID_HOME=#path_to_android_sdk
+export PATH=$PATH:$ANDROID_HOME/tools/:$ANDROID_HOME/platform_tools/
+
+*check*
+[source,bash]
+android -h
+
+--
+3. Scala + SBT
++
+--
+include::scala-ubuntu-installation.adoc[]
+
+*check*
+scala -version
+
+or you can use sdkman. http://sdkman.io/install.html
+and install scala and sbt by simple command:
+
+[source,bash]
+sdk install scala
+sdk install sbt
+sdk install activator
+
+--
+4. activator
++
+--
+https://www.lightbend.com/activator/download
+
+*check*
+
+activator ui
+--
+5. Other tools
+  a. git
+  +
+  --
+  git -version
+  --
 
 
+== Example project.
 
-3. Scala
+You can clone example project from https://github.com/mariopce/scalaonandroid
 
-4. Other tools
+== Scala in 30 min
 
+=== Scala is
 
+- Functional
+- Objected Oriented
+- Statically Typed
+- Scalable ... Language
 
-:numbered!:
-[abstract]
-Example Abstract
-----------------
+running on JVM
+
+include::scala-intro.adoc[]
+
+== Android in 15 min
+
+== Sample Scala Android Project
