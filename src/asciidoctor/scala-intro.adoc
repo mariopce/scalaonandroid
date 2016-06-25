@@ -169,5 +169,58 @@ object ScalaTutorial {
   }
 }
 
+functions with variable numbers of params
 
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    def getSum(n1:Int*) : Int = {
+      var sum : Int = 0;
+      for (i<- n1){
+        sum += i;
+      }
+      sum
+    }
+    println(getSum(1, 2, 3))
+  }
+}
 
+Error ()
+
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]): Unit = {
+    def getSum(n1:Int*) {
+      var sum : Int = 0;
+      for (i<- n1){
+        sum += i;
+      }
+      sum
+    }
+    println(getSum(1, 2, 3))
+  }
+}
+
+Arrays vs BufferArray, Arrays should be used when size is known.
+
+[source]
+val myLuckyNumb = Array[Int](20)
+myLuckyNumb(0) = 13
+println(myLuckyNumb(0))
+val myFriends = Array ("Marek", "Tomek", "Krzysiek")
+println(myFriends(0))
+
+ArrayBuffer
+[source]
+val myFriends = ArrayBuffer[String]()
+myFriends.insert(0, "Grzegorz")
+myFriends += "Michal"
+myFriends ++= Array("Agnieszka", "Marta")
+myFriends.remove(0);
+println(myFriends)
+
+Array filter
+[source]
+val favNumes = Array(1, 2,3)
+val favNumDouble = for(i<-favNumes if i %2 ==0 ) yield i*2
+favNumDouble.foreach(println)
