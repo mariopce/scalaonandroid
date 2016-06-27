@@ -35,3 +35,112 @@ libraryDependencies ++= Seq(
   compilerPlugin("org.brianmckenna" %% "wartremover" % "0.10")
 )
 
+==== Macroid view
+
+https://github.com/47deg/macroid-starter/blob/master/src/main/scala/com/example/macroid/starter/MainActivity.scala
+
+==== Macroid akka
+
+add macroid-dependencies
+
+[source]
+"org.macroid" %% "macroid-akka" % "2.0.0-M4",
+"com.typesafe.akka" %% "akka-actor" % "2.3.6",
+
+add proguard rules
+
+[source]
+----
+// ProGuard rules for Akka
+proguardOptions in Android ++= Seq(
+  "-keep class akka.actor.Actor$class { *; }",
+  "-keep class akka.actor.LightArrayRevolverScheduler { *; }",
+  "-keep class akka.actor.LocalActorRefProvider { *; }",
+  "-keep class akka.actor.CreatorFunctionConsumer { *; }",
+  "-keep class akka.actor.TypedCreatorFunctionConsumer { *; }",
+  "-keep class akka.dispatch.BoundedDequeBasedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.UnboundedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.UnboundedDequeBasedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.DequeBasedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.MultipleConsumerSemantics { *; }",
+  "-keep class akka.actor.LocalActorRefProvider$Guardian { *; }",
+  "-keep class akka.actor.LocalActorRefProvider$SystemGuardian { *; }",
+  "-keep class akka.dispatch.UnboundedMailbox { *; }",
+  "-keep class akka.actor.DefaultSupervisorStrategy { *; }",
+  "-keep class macroid.akka.AkkaAndroidLogger { *; }",
+  "-keep class akka.event.Logging$LogExt { *; }"
+)
+----
+
+==== Actions
+
+import actions
+
+[source]
+import macroid._
+import macroid.FullDsl._
+import macroid.contrib._
+import macroid.viewable._
+import macroid.Ui
+import macroid.UiThreading._
+import macroid.UiThreading.UiFuture
+import scala.concurrent.ExecutionContext.Implicits.global
+
+
+Run something on UI thread
+[source]
+val action = Ui {
+      displayTextView.setText("Answer")
+   }
+runUi(action);
+
+==== Actors
+
+* Create src/main/resources/application.conf
+
+[source]
+include::../../src/main/resources/application.conf[]
+
+* Create Rocket actors
+
+[source]
+----
+include::../../src/main/scala/com/fortysevendeg/scala/android/RacketActor.scala[]
+----
+
+* Init actors
+
+[source]
+with IdGeneration with AkkaActivity
+
+[source]
+----
+ override val actorSystemName: String = "pingpong"
+  // players
+  lazy val ping = actorSystem.actorOf(RacketActor.props, "ping")
+  lazy val pong = actorSystem.actorOf(RacketActor.props, "pong")
+----
+
+* Send message
+
+[source]
+ping ! RacketActor.Ball
+
+* say about remote actors
+* say about DB actors
+* say about Network actors
+
+
+==== Future
+
+[source]
+----
+Future {
+    val note = Source.fromURL("http://www.xmlfiles.com/examples/note_in_dtd.xml").mkString
+    Log.d("ui", "note" + note);
+    note
+
+} mapUi  { (x) ⇒
+  Ui(displayTextView.setText(x.toString)) // happens on the UI thread
+}
+----

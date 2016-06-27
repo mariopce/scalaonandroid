@@ -39,6 +39,27 @@ proguardOptions in Android ++= Seq(
   "-ignorewarnings",
   "-keep class scala.Dynamic")
 
+// ProGuard rules for Akka
+proguardOptions in Android ++= Seq(
+  "-keep class akka.actor.Actor$class { *; }",
+  "-keep class akka.actor.LightArrayRevolverScheduler { *; }",
+  "-keep class akka.actor.LocalActorRefProvider { *; }",
+  "-keep class akka.actor.CreatorFunctionConsumer { *; }",
+  "-keep class akka.actor.TypedCreatorFunctionConsumer { *; }",
+  "-keep class akka.dispatch.BoundedDequeBasedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.UnboundedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.UnboundedDequeBasedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.DequeBasedMessageQueueSemantics { *; }",
+  "-keep class akka.dispatch.MultipleConsumerSemantics { *; }",
+  "-keep class akka.actor.LocalActorRefProvider$Guardian { *; }",
+  "-keep class akka.actor.LocalActorRefProvider$SystemGuardian { *; }",
+  "-keep class akka.dispatch.UnboundedMailbox { *; }",
+  "-keep class akka.actor.DefaultSupervisorStrategy { *; }",
+  "-keep class macroid.akka.AkkaAndroidLogger { *; }",
+  "-keep class akka.event.Logging$LogExt { *; }"
+)
+
+
 javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 scalacOptions += "-target:jvm-1.7"
@@ -71,6 +92,8 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   aar("org.macroid" %% "macroid" % "2.0.0-M4"),
   aar("org.macroid" %% "macroid-viewable" % "2.0.0-M4"),
+  "org.macroid" %% "macroid-akka" % "2.0.0-M4",
+  "com.typesafe.akka" %% "akka-actor" % "2.3.6",
   aar("com.android.support" % "support-v4" % "23.2.0"),
   compilerPlugin("org.brianmckenna" %% "wartremover" % "0.10")
 )
