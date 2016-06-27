@@ -16,41 +16,43 @@
 
 package com.fortysevendeg.scala.android
 
+
 import android.app.Activity
 import android.content.Context
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.View.OnClickListener
+
 
 class SampleActivity extends Activity with TypedFindView with ImplicitContext with ScalaToasts {
 
-  lazy val textHello = findView(TR.textview);
+
+  lazy val makeItButton = {
+    val b = findView(TR.make_it_button)
+    b.setOnClickListener(new OnClickListener {
+      override def onClick(v: View): Unit = {
+        "Clicked".toast
+        Log.d("UI", "Clicked");
+      }
+    })
+    b
+  }
+  lazy val displayTextView = findView(TR.display)
 
 
-  //lazy val locationManager; //= LocationManager
+  // lazy val locationManager =  LocationManager.get
   override def onCreate(bundle: Bundle) {
     super.onCreate(bundle)
     setContentView(R.layout.main)
-    textHello.setText(R.string.hello_world)
-    //TR - Typed Resource better R
-
 
     //Implisit convertion
-    def toastConference() = "fsfs".toast
-
-    new Toastable("mes").toast
-
-    toastMyName("fdsfds")
-
-
+    "test1".toast
+    Log.d("UI", "Clicked");
+    println(makeItButton)
+    //displayTextView <~ text("Hello!")
   }
-
-
-  //Implisit params
-  def toastMyName(name: String)(implicit ctx: Context) = {
-    import android.widget.Toast._
-    makeText(ctx, name, LENGTH_SHORT).show();
-  }
-
-
-
 }
+
+

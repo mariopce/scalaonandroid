@@ -97,3 +97,5 @@ include::scala-intro.adoc[]
 == Android in 15 min
 
 == Sample Scala Android Project
+
+include::scala-android.adoc[]

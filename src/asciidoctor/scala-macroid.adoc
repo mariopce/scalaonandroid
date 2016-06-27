@@ -1,0 +1,37 @@
+==== Scala Macroid
+
+Prepare env
+http://macroid.github.io/Samples.html
+
+
+==== Macroid instalation
+
+add new resolver
+[source]
+resolvers ++= Seq(
+  Resolver.sonatypeRepo("releases"),
+  "jcenter" at "http://jcenter.bintray.com"
+)
+
+add scala options
+
+[source]
+-----
+scalacOptions in (Compile, compile) ++=
+  (dependencyClasspath in Compile).value.files.map("-P:wartremover:cp:" + _.toURI.toURL)
+
+scalacOptions in (Compile, compile) ++= Seq(
+  "-P:wartremover:traverser:macroid.warts.CheckUi"
+)
+-----
+
+add library dependencies
+
+[source]
+libraryDependencies ++= Seq(
+  aar("org.macroid" %% "macroid" % "2.0.0-M4"),
+  aar("org.macroid" %% "macroid-viewable" % "2.0.0-M4"),
+  aar("com.android.support" % "support-v4" % "23.2.0"),
+  compilerPlugin("org.brianmckenna" %% "wartremover" % "0.10")
+)
+

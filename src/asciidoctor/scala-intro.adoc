@@ -224,3 +224,167 @@ Array filter
 val favNumes = Array(1, 2,3)
 val favNumDouble = for(i<-favNumes if i %2 ==0 ) yield i*2
 favNumDouble.foreach(println)
+
+Play with array, max, min, reverse, sort
+[source]
+val array = List(1, 2, 3, 4)
+println(array.max)
+println(array.min)
+println(array.reverse)
+println(array.sortWith(_<_))
+println(array.mkString(", "))
+
+Play with map
+[source]
+//immutable map
+val employees = Map("Manager" -> "Bob", "Secretary" -> "Ann")
+if (employees.contains("Manager")){
+   printf("Manager %s\n", employees("Manager"))
+}else{
+   println("No managers")
+}
+val customers = collection.mutable.Map("Customer1" -> "Mariusz", "Customer2" -> "Janusz");
+customers("Customer1") = "Janek"
+for((k, v) <- customers){
+   printf("%s is %s \n", k, v)
+}
+
+Play with tuple
+[source]
+//immutable
+val tupleMario = (14, "Mariusz Saramak", 10.33f)
+printf("%s owes us %.2f \n", tupleMario._2, tupleMario._3)
+//iteration
+tupleMario.productIterator.foreach{ i => println(i) }
+
+Animal class, constructor, getters, setters
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]) {
+    var azor = new Animal("Azor", 2)
+    println(azor.getName() + " " + azor.getAge())
+
+  }
+  class Animal(var name: String, var age: Int = 0){
+    println("Created new aniaml " + getName())
+    setName(name)
+
+    def getName() : String = name
+    def getAge() = age
+    def setName(name: String): Unit = {
+      if (name.matches(".*\\d+.*")){
+        this.name = "No name"
+      }else{
+        this.name= name
+      }
+    }
+  }
+}
+
+Add new constructor
+[source]
+def this(name: String){
+    this(name, 3);
+}
+
+Companion object
+[source]
+object Animal {
+    private var id = 0;
+    def newId(): Int = {
+      id += 1
+      id
+    }
+  }
+
+Inheritance
+[source]
+class Dog(name: String, age:Int, sound:String) extends Animal(name, age) {
+    println("Createing dog" + getName())
+    def this(name: String) = {
+      this(name, 0, "howhow")
+    }
+    override def toString() : String = {
+      name
+    }
+  }
+
+Abstract class
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]) {
+    var cat = new Cat(2)
+    cat.move
+  }
+  abstract class MovingAnimal(moveSpeed: Double) {
+    def move
+  }
+  class Cat(moveSpeed: Double) extends MovingAnimal(moveSpeed) {
+    override def move: Unit = {
+      println("cat with move speed " + moveSpeed)
+    }
+  }
+}
+
+Traits
+[source]
+object ScalaTutorial {
+  def main(args: Array[String]) {
+    var bird = new Bird("Wrobel")
+    var bigBird = new Bird("Wielki ptak") with NoFlayable
+    bigBird.fly();
+    bird.fly();
+  }
+  trait Movable {
+    def move(): String = {
+      "It can move"
+    }
+  }
+  trait Flayable {
+    def fly() = {
+      println("It can fly")
+    }
+  }
+  trait NoFlayable extends Flayable {
+    override def fly() = {
+      println("Can not fly")
+    }
+  }
+  trait Soundable {
+    def noise()
+  }
+  class Bird(name: String) extends Movable with Flayable with Soundable {
+    override def noise(): Unit = println(s"${name} make noice")
+  }
+}
+
+Passing function as arg
+[source]
+def times3(i: Int) = i * 3
+def times4(i: Int) = i * 4
+def multiply(func: (Int) => Double, i: Int): Double = {
+   func(i)
+}
+println(multiply(times3, 2));
+
+Try,catch,finally
+object ScalaTutorial {
+  def main(args: Array[String]) {
+    val fun10log = math.log10 _
+    def times3(i: Int) = i * 3
+    def times4(i: Int) = i * 4
+    def multiply(func: (Int) => Double, i: Int): Double =
+      try {
+        func(i)
+      }catch {
+        case ex : ArithmeticException => { println("don"); Double.PositiveInfinity}
+        case ex : NullPointerException => throw ex
+
+      } finally {
+
+      }
+    println(multiply(null, 2));
+  }
+}
+
+

@@ -1,0 +1,113 @@
+==== Scala Android
+
+Prepare env
+http://www.47deg.com/blog/scala-on-android-preparing-the-environment
+
+
+==== Scala in Android
+
+include::../../build.sbt[source]
+
+Sbt == activator
+
+==== Basic commands
+
+[source]
+./activator tasks
+clean - clean project
+debug - run app in debug mode, android wait for debugger
+run - run project on device
+test - run test
+
+==== Typed Resources
+TR > R
+
+==== Implicit
+
+Implicit != Explicit
+(niejawny, jawny )
+
+===== Method to show context
+
+It looks like in java
+Nice import
+
+[source]
+ def showToast(msg : String, ctx:Context): Unit ={
+    import android.widget.Toast._
+    makeText(ctx, msg, LENGTH_SHORT).show();
+  }
+
+We execute the method [explicit]
+
+[source]
+showToast("test3", getApplicationContext)
+
+===== Modify to implicit
+
+[source]
+def showToast(msg: String)(implicit ctx: Context): Unit = {
+    import android.widget.Toast._
+    makeText(ctx, msg, LENGTH_SHORT).show();
+  }
+
+[source]
+implicit val context : Context = getApplicationContext
+showToast("test3") (getApplicationContext)
+
+===== Implicit context
+
+[source]
+trait ImplicitContext  {
+    this: Activity =>
+      implicit val context = this
+}
+
+when Activity is with our ImplicitContext and our trait use ImplicitContext in activity then context
+is activity
+
+===== Implicit conventions
+
+[source]
+showToast("test3") (getApplicationContext)
+
+[source]
+showToast("test3")
+
+[source]
+"test3".toast()
+
+===== Toastable
+
+Toastable type
+
+[source]
+----
+include::../../src/main/scala/com/fortysevendeg/scala/android/Toastable.scala[tags=toastable]
+----
+
+toastable call
+[source]
+new Toastable("test3").toast()
+
+===== Implicit Toastable
+
+[source]
+----
+include::../../src/main/scala/com/fortysevendeg/scala/android/ScalaToasts.scala[tags=scalatoasts]
+----
+
+Direct call
+[source]
+asToastable("test3").toast
+
+===== Implicit conversion
+
+[source]
+class SampleActivity extends Activity with TypedFindView with ImplicitContext with ScalaToasts
+
+"test3".toast
+
+search implicit conversion
+asToastable("String").toast(ScalaActivity.this)
+
